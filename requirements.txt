@@ -1,3 +1,4 @@
 opencv-python-contrib-headless
 numpy
 streamlit
+pip>=24.3.1
