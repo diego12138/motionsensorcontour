@@ -1,9 +1,14 @@
 import cv2
+import streamlit as st
+import numpy as np
 
+st.title('Motion Sensor')
+run = st.checkbox('Start Sensing')
+FRAME_WINDOW = st.image([])
 cap = cv2.VideoCapture(0)
 bg_sub = cv2.createBackgroundSubtractorMOG2()   
 
-while True:
+while run:
     ret, frame = cap.read()
     
     fgmask = bg_sub.apply(frame)
@@ -14,12 +19,7 @@ while True:
             x, y, w, h = cv2.boundingRect(contour)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
     
-    cv2.imshow('original', frame)
-    cv2.imshow('fg', fgmask)
-    
-    k = cv2.waitKey(30) & 0xff
-    if k == 27:
-        break
+    FRAME_WINDOW.image(frame, channels='BGR')
     
 cap.release()
 cv2.destroyAllWindows()
