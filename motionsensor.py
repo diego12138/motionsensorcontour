@@ -9,6 +9,11 @@ cap = cv2.VideoCapture(0)
 bg_sub = cv2.createBackgroundSubtractorMOG2()   
 
 while run:
+    if not run:
+        break
+    if not ret or frame is None:
+        st.warning("Unable to capture video frame. Check your camera or permissions.")
+        continue
     ret, frame = cap.read()
     
     fgmask = bg_sub.apply(frame)
