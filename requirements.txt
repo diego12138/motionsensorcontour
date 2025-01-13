@@ -1,4 +1,4 @@
-opencv-python-contrib-headless
+opencv-python-headless
 numpy
 streamlit
-pip>=24.3.1
+
